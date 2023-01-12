@@ -13,6 +13,11 @@ class ActivityIndicatorTableViewCell: UITableViewCell {
         super.awakeFromNib()
         indicatorView.startAnimating()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        indicatorView.startAnimating()
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
