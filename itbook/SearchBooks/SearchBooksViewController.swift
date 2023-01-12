@@ -71,6 +71,18 @@ extension SearchBooksViewController: UITableViewDelegate {
             viewModel.more()
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let item = dataSource.itemIdentifier(for: indexPath) {
+            switch item {
+            case .book(let searchBookRowViewModel):
+                viewModel.detail(searchBookRowViewModel.isbn13)
+            case .loading:
+                break
+            }
+        }
+        
+        
+    }
 }
 
 extension SearchBooksViewController: UISearchBarDelegate {

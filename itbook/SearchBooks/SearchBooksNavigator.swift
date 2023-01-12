@@ -8,14 +8,14 @@
 import UIKit
 import SafariServices
 
-protocol SearchBookNavigator {
+protocol SearchBooksNavigator {
     func toAlert(_ message: String?)
     func toBookDetail(_ isbn13: String)
     func toWeb(_ url: URL)
 }
 
 
-class DefaultSearchBookNavigator: SearchBookNavigator {
+class DefaultSearchBooksNavigator: SearchBooksNavigator {
     private let navigationController: UINavigationController
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController

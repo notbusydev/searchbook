@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SearchBookModel {
+class SearchBooksModel {
     var keyword: String = ""
     var currentPage: Int? = nil
     var totalCount: Int = 0

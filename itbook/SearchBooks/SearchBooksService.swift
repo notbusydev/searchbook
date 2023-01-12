@@ -7,10 +7,10 @@
 
 import Foundation
 
-class SearchBookService {
+class SearchBooksService {
     let repository: BookRepository
-    private(set) var currentModel: SearchBookModel
-    init(repository: BookRepository, currentModel: SearchBookModel) {
+    private(set) var currentModel: SearchBooksModel
+    init(repository: BookRepository, currentModel: SearchBooksModel) {
         self.repository = repository
         self.currentModel = currentModel
     }

@@ -23,9 +23,9 @@ class SearchBooksViewModel {
             onIsLoadingUpdate?(isLoading)
         }
     }
-    private let service: SearchBookService
-    private let navigator: SearchBookNavigator
-    init(service: SearchBookService, navigator: SearchBookNavigator) {
+    private let service: SearchBooksService
+    private let navigator: SearchBooksNavigator
+    init(service: SearchBooksService, navigator: SearchBooksNavigator) {
         self.service = service
         self.navigator = navigator
     }
@@ -66,3 +66,8 @@ class SearchBooksViewModel {
             self.navigator.toAlert("링크가 유실되었습니다.")
         }
     }
+    
+    func detail(_ isbn13: String) {
+        self.navigator.toBookDetail(isbn13)
+    }
+}
