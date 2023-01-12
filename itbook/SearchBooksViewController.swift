@@ -21,6 +21,7 @@ class SearchBooksViewController: UIViewController {
     }
     
     func initView() {
+        title = "검색"
         searchBar.delegate = self
         tableView.delegate = self
         
@@ -29,6 +30,7 @@ class SearchBooksViewController: UIViewController {
             case .book(let value):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SearchBookTableViewCell", for: indexPath) as! SearchBookTableViewCell
                 cell.initView(value)
+                
                 return cell
             case .loading:
                 return tableView.dequeueReusableCell(withIdentifier: "ActivityIndicatorTableViewCell", for: indexPath)

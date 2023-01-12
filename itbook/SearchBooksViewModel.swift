@@ -23,18 +23,23 @@ class SearchBooksViewModel {
             onIsLoadingUpdate?(isLoading)
         }
     }
-    let service: SearchBookService
-    init(service: SearchBookService) {
+    private let service: SearchBookService
+    private let navigator: SearchBookNavigator
+    init(service: SearchBookService, navigator: SearchBookNavigator) {
         self.service = service
+        self.navigator = navigator
     }
     func search(_ keyword: String?) {
-        guard let keyword = keyword else { return }
+        guard let keyword = keyword, !keyword.isEmpty else {
+            self.navigator.toAlert("검색어를 입력해주세요.")
+            return
+        }
         guard !isLoading else { return }
         isLoading = true
         service.search(keyword: keyword) { [weak self] error in
             self?.isLoading = false
             if let error = error {
-                
+                self?.navigator.toAlert(error.localizedDescription)
             } else {
                 self?.onItemListUpdated?()
             }
@@ -47,7 +52,7 @@ class SearchBooksViewModel {
         service.more { [weak self] error in
             self?.isLoading = false
             if let error = error {
-                
+                self?.navigator.toAlert(error.localizedDescription)
             } else {
                 self?.onItemListUpdated?()
             }

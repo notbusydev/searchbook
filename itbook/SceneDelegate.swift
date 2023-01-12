@@ -20,8 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
         let searchBooksViewController = SearchBooksViewController.instantiate(.Main)
-        searchBooksViewController.viewModel = SearchBooksViewModel(service: SearchBookService(repository: BookRepository(), currentModel: SearchBookModel()))
-        window?.rootViewController = searchBooksViewController
+        let navigationController = UINavigationController(rootViewController: searchBooksViewController)
+        let service = SearchBookService(repository: BookRepository(), currentModel: SearchBookModel())
+        let navigator = DefaultSearchBookNavigator(navigationController)
+        searchBooksViewController.viewModel = SearchBooksViewModel(service: service, navigator: navigator)
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
