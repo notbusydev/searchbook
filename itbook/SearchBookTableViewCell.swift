@@ -22,7 +22,10 @@ class SearchBookTableViewCell: UITableViewCell {
     func initView(_ book: SearchBookRowViewModel) {
         thunailImageView.setImage(book.image)
         titleLabel.text = book.title
-        subTitleLabel.text = book.subTitle
+        if let subTitle = book.subTitle {
+            subTitleLabel.text = subTitle
+        }
+        subTitleLabel.isHidden = book.subTitle == nil
         isbn13Label.text = book.isbn13
         priceLabel.text = book.price
     }
