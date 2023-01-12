@@ -58,4 +58,11 @@ class SearchBooksViewModel {
             }
         }
     }
-}
+    
+    func link(_ urlString: String) {
+        if let url = urlString.toURL {
+            self.navigator.toWeb(url)
+        } else {
+            self.navigator.toAlert("링크가 유실되었습니다.")
+        }
+    }

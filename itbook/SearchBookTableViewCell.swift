@@ -14,12 +14,20 @@ class SearchBookTableViewCell: UITableViewCell {
     @IBOutlet weak var isbn13Label: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var webLinkButton: UIButton!
-    
+    var webLinkAction: (() -> Void)?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        webLinkButton.addTarget(self, action: #selector(self.webLinkButtonTouched), for: .touchUpInside)
+    }
     func initView(_ book: SearchBookRowViewModel) {
         thunailImageView.setImage(book.image)
         titleLabel.text = book.title
         subTitleLabel.text = book.subTitle
         isbn13Label.text = book.isbn13
         priceLabel.text = book.price
+    }
+    
+    @objc func webLinkButtonTouched() {
+        webLinkAction?()
     }
 }

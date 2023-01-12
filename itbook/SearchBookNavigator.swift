@@ -31,6 +31,6 @@ class DefaultSearchBookNavigator: SearchBookNavigator {
     }
     
     func toWeb(_ url: URL) {
-        navigationController.pushViewController(SFSafariViewController(url: url), animated: true)
+        navigationController.present(SFSafariViewController(url: url), animated: true)
     }
 }

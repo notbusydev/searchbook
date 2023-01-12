@@ -30,7 +30,9 @@ class SearchBooksViewController: UIViewController {
             case .book(let value):
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SearchBookTableViewCell", for: indexPath) as! SearchBookTableViewCell
                 cell.initView(value)
-                
+                cell.webLinkAction = { [weak self] in
+                    self?.viewModel.link(value.urlString)
+                }
                 return cell
             case .loading:
                 return tableView.dequeueReusableCell(withIdentifier: "ActivityIndicatorTableViewCell", for: indexPath)

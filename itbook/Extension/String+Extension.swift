@@ -12,4 +12,8 @@ extension String {
     var toInt: Int? {
         Int(self)
     }
+    
+    var toURL: URL? {
+        URL(string: self)
+    }
 }
