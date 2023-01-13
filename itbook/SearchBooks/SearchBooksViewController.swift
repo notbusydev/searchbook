@@ -85,13 +85,8 @@ extension SearchBooksViewController: UITableViewDelegate {
         }
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let item = dataSource.itemIdentifier(for: indexPath) {
-            switch item {
-            case .book(let searchBookRowViewModel):
-                viewModel.detail(searchBookRowViewModel.isbn13)
-            case .loading:
-                break
-            }
+        if let item = dataSource.itemIdentifier(for: indexPath), item != .loading {
+            viewModel.detail(indexPath)
         }
         
         
@@ -102,6 +97,17 @@ extension SearchBooksViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         viewModel.search(searchBar.text)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
     }
 }
 

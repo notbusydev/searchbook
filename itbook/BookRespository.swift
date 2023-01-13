@@ -17,7 +17,7 @@ enum Result<Value: Decodable> {
 
 class BookRepository {
     func search(keyword: String, page: Int, completion: @escaping (Result<SearchBooksResponse>) -> Void) {
-        guard let url = URL(string: "https://api.itbook.store/1.0/search/\(keyword)/\(page)") else {
+        guard let url = "https://api.itbook.store/1.0/search/\(keyword)/\(page)".toURL else {
             completion(.error(RequestError.wrongURL))
             return
         }
@@ -38,7 +38,7 @@ class BookRepository {
     }
     
     func book(isbn13: String, completion: @escaping (Result<BookResponse>) -> Void) {
-        guard let url = URL(string: "https://api.itbook.store/1.0/books/\(isbn13)") else {
+        guard let url = "https://api.itbook.store/1.0/books/\(isbn13)".toURL else {
             completion(.error(RequestError.wrongURL))
             return
         }
@@ -59,7 +59,7 @@ class BookRepository {
             } else {
                 completion(.error(error ?? ResponseError.nonData))
             }
-        }
+        }.resume()
     }
     
     enum RequestError: Error {
