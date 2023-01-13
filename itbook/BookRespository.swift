@@ -14,8 +14,24 @@ enum Result<Value: Decodable> {
     case error(Error)
 }
 
+protocol URLSessionProtocol {
+    func dataTask(request: URLRequest, completionHandler: @escaping @Sendable (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTaskProtocol
+}
 
-class BookRepository {
+protocol URLSessionDataTaskProtocol {
+    func resume()
+}
+
+protocol BookRepositoryProtocol {
+    func search(keyword: String, page: Int, completion: @escaping (Result<SearchBooksResponse>) -> Void)
+    func book(isbn13: String, completion: @escaping (Result<BookResponse>) -> Void)
+}
+
+class BookRepository: BookRepositoryProtocol {
+    let session: URLSessionProtocol
+    init(session: URLSessionProtocol) {
+        self.session = session
+    }
     func search(keyword: String, page: Int, completion: @escaping (Result<SearchBooksResponse>) -> Void) {
         guard let url = "https://api.itbook.store/1.0/search/\(keyword)/\(page)".toURL else {
             completion(.error(RequestError.wrongURL))
@@ -23,7 +39,7 @@ class BookRepository {
         }
         var request = URLRequest(url: url, timeoutInterval: 3)
         request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        session.dataTask(request: request) { data, _, error in
             if let data = data {
                 do {
                     let response = try JSONDecoder().decode(SearchBooksResponse.self, from: data)
@@ -44,7 +60,7 @@ class BookRepository {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        session.dataTask(request: request) { data, _, error in
             if let data = data {
                 do {
                     let response = try JSONDecoder().decode(BookResponse.self, from: data)

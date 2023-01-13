@@ -8,9 +8,9 @@
 import Foundation
 
 class SearchBooksService {
-    let repository: BookRepository
+    let repository: BookRepositoryProtocol
     private(set) var currentModel: SearchBooksModel
-    init(repository: BookRepository, currentModel: SearchBooksModel) {
+    init(repository: BookRepositoryProtocol, currentModel: SearchBooksModel) {
         self.repository = repository
         self.currentModel = currentModel
     }
@@ -46,9 +46,5 @@ class SearchBooksService {
                 completion(error)
             }
         }
-    }
-    
-    private func search(keyword: String, page: Int, completion: @escaping (Error?) -> Void) {
-        
     }
 }

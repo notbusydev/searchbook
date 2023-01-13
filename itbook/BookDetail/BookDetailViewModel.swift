@@ -6,10 +6,10 @@
 //
 
 import Foundation
-class BookDetailViewModel {
+class BookDetailViewModel: BookDetailViewModelProtocol {
     let navigator: BookDetailNavigator
     private let currentModel: BookDetailModel
-    private let respository: BookRepository
+    private let respository: BookRepositoryProtocol
     var onLoaded: (() -> Void)?
     var onIsLoadingUpdate: ((Bool) -> Void)?
     
@@ -18,7 +18,7 @@ class BookDetailViewModel {
         return BookInformation(book)
     }
     
-    init(navigator: BookDetailNavigator, model: BookDetailModel, respository: BookRepository) {
+    init(navigator: BookDetailNavigator, model: BookDetailModel, respository: BookRepositoryProtocol) {
         self.navigator = navigator
         self.currentModel = model
         self.respository = respository

@@ -6,6 +6,16 @@
 //
 
 import UIKit
+
+protocol BookDetailViewModelProtocol {
+    var onLoaded: (() -> Void)? { get set }
+    var onIsLoadingUpdate: ((Bool) -> Void)? { get set }
+    var bookInformation: BookDetailViewModel.BookInformation? { get }
+    
+    func loadBook()
+    func toWeb(_ urlString: String?)
+}
+
 typealias PDFLink = (name: String, link: String)
 class BookDetailViewController: UIViewController {
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
@@ -25,7 +35,7 @@ class BookDetailViewController: UIViewController {
     @IBOutlet weak var isbn13Label: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
-    var viewModel: BookDetailViewModel!
+    var viewModel: BookDetailViewModelProtocol!
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class SearchBooksViewModel {
+class SearchBooksViewModel: SearchBooksViewModelProtocol {
     var onItemListUpdated: (() -> Void)?
     var onIsLoadingUpdate: ((Bool) -> Void)?
     var itemList: [SearchBookRowItem] {
@@ -86,7 +86,7 @@ class SearchBooksViewModel {
             image = book.image
             title = book.title
             subTitle = book.subtitle
-            isbn13 = String(format: "ISPN13: %@", book.isbn13)
+            isbn13 = String(format: "ISBN13: %@", book.isbn13)
             price = String(format: "가격: %@", book.price)
             urlString = book.url
         }

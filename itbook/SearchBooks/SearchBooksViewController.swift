@@ -6,13 +6,24 @@
 //
 
 import UIKit
+protocol SearchBooksViewModelProtocol {
+    var onItemListUpdated: (() -> Void)? { get set }
+    var onIsLoadingUpdate: ((Bool) -> Void)? { get set }
+    var itemList: [SearchBookRowItem] { get }
+    var emptyText: String? { get }
+    
+    func search(_ keyword: String?)
+    func more()
+    func link(_ urlString: String)
+    func detail(_ indexPath: IndexPath)
+}
 typealias SearchBookItem = SearchBooksViewModel.SearchBookItemViewModel
 class SearchBooksViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var emptyLabel: UILabel!
-    var viewModel: SearchBooksViewModel!
+    var viewModel: SearchBooksViewModelProtocol!
     
     var dataSource: UITableViewDiffableDataSource<Int,SearchBookRowItem>!
     override func viewDidLoad() {

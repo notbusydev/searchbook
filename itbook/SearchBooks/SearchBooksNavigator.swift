@@ -29,7 +29,7 @@ class DefaultSearchBooksNavigator: SearchBooksNavigator {
     func toBookDetail(_ isbn13: String) {
         let bookDetailViewController = BookDetailViewController.instantiate(.Main)
         let navigator = DefaultBookDetailNavigator(navigationController: navigationController)
-        let viewModel = BookDetailViewModel(navigator: navigator, model: BookDetailModel(isbn13: isbn13), respository: BookRepository())
+        let viewModel = BookDetailViewModel(navigator: navigator, model: BookDetailModel(isbn13: isbn13), respository: BookRepository(session: URLSession.shared))
         bookDetailViewController.viewModel = viewModel
         navigationController.pushViewController(bookDetailViewController, animated: true)
     }
