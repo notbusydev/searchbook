@@ -70,8 +70,8 @@ class SearchBooksViewModel {
         }
     }
     
-    func detail(_ isbn13: String) {
-        self.navigator.toBookDetail(isbn13)
+    func detail(_ indexPath: IndexPath) {
+        self.navigator.toBookDetail(service.currentModel.searchBook[indexPath.row].isbn13)
     }
     
     struct SearchBookItemViewModel: Hashable {

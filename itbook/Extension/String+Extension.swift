@@ -14,6 +14,7 @@ extension String {
     }
     
     var toURL: URL? {
-        URL(string: self)
+        guard let encodingString = self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
+        return URL(string: encodingString)
     }
 }
