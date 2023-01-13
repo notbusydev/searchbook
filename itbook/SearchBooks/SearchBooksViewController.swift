@@ -11,6 +11,7 @@ class SearchBooksViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var emptyLabel: UILabel!
     var viewModel: SearchBooksViewModel!
     
     var dataSource: UITableViewDiffableDataSource<Int,SearchBookRowItem>!
@@ -22,9 +23,14 @@ class SearchBooksViewController: UIViewController {
     
     func initView() {
         title = "검색"
+        searchBar.placeholder = "입력 후 검색"
         searchBar.delegate = self
         tableView.delegate = self
-        
+        emptyLabel.text = "검색해주세요"
+        tableView.isHidden = true
+    }
+    
+    func initBind() {
         let cellProvider: (UITableView, IndexPath, SearchBookRowItem) -> UITableViewCell? = { tableView, indexPath, item in
             switch item {
             case .book(let value):
@@ -39,17 +45,24 @@ class SearchBooksViewController: UIViewController {
             }
         }
         dataSource = UITableViewDiffableDataSource<Int, SearchBookRowItem>(tableView: tableView, cellProvider: cellProvider)
+        dataSource.defaultRowAnimation = .fade
         tableView.dataSource = dataSource
-    }
-    
-    func initBind() {
+        
         viewModel.onItemListUpdated = { [weak self] in
             guard let self = self else { return }
-            var currentSnapshot = self.dataSource.snapshot()
-            currentSnapshot.deleteAllItems()
-            currentSnapshot.appendSections([0])
-            currentSnapshot.appendItems(self.viewModel.itemList, toSection: 0)
-            self.dataSource.apply(currentSnapshot)
+            DispatchQueue.main.async {
+                self.tableView.isHidden = self.viewModel.emptyText != nil
+                if let emptyText = self.viewModel.emptyText {
+                    self.emptyLabel.text = emptyText
+                } else {
+                    var currentSnapshot = self.dataSource.snapshot()
+                    currentSnapshot.deleteAllItems()
+                    currentSnapshot.appendSections([0])
+                    currentSnapshot.appendItems(self.viewModel.itemList, toSection: 0)
+                    self.dataSource.apply(currentSnapshot)
+                }
+            }
+            
         }
         
         viewModel.onIsLoadingUpdate = { [weak self] isLoading in

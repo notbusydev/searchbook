@@ -23,6 +23,12 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="rZf-zh-q1Z"/>
                                 </connections>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9b-gS-5aS">
+                                <rect key="frame" x="176" y="428.33333333333331" width="41.333333333333343" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5lj-jh-reB">
                                 <rect key="frame" x="0.0" y="115" width="393" height="737"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -47,7 +53,7 @@
                                                     <buttonConfiguration key="configuration" style="plain" title="웹 링크"/>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bKU-oL-8il">
-                                                    <rect key="frame" x="145" y="11" width="228" height="100.66666666666667"/>
+                                                    <rect key="frame" x="145" y="11" width="228" height="80.333333333333329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBW-qp-5mS">
                                                             <rect key="frame" x="0.0" y="0.0" width="228" height="24"/>
@@ -68,8 +74,8 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zQU-1Z-8sv">
-                                                            <rect key="frame" x="0.0" y="60" width="228" height="40.666666666666657"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                                            <rect key="frame" x="0.0" y="60.000000000000007" width="228" height="20.333333333333336"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -129,18 +135,21 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="T9b-gS-5aS" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="14t-Vu-vus"/>
                             <constraint firstItem="5lj-jh-reB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="7AQ-lR-dTi"/>
                             <constraint firstItem="cdR-08-8oi" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Fd6-w4-85o"/>
                             <constraint firstItem="cdR-08-8oi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="FrE-vZ-t9J"/>
                             <constraint firstItem="adB-vO-bos" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="P4g-5E-F4J"/>
                             <constraint firstItem="adB-vO-bos" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Sjx-OJ-oey"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5lj-jh-reB" secondAttribute="trailing" id="WMc-lU-HzY"/>
+                            <constraint firstItem="T9b-gS-5aS" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="Zxh-Tc-UH7"/>
                             <constraint firstItem="5lj-jh-reB" firstAttribute="top" secondItem="cdR-08-8oi" secondAttribute="bottom" id="a72-HK-LI3"/>
                             <constraint firstAttribute="bottom" secondItem="5lj-jh-reB" secondAttribute="bottom" id="nXv-zZ-FNW"/>
                             <constraint firstAttribute="trailing" secondItem="cdR-08-8oi" secondAttribute="trailing" id="uki-od-aC4"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emptyLabel" destination="T9b-gS-5aS" id="Xw0-QT-s04"/>
                         <outlet property="indicatorView" destination="adB-vO-bos" id="7X1-HT-RiM"/>
                         <outlet property="searchBar" destination="cdR-08-8oi" id="GEj-66-Ife"/>
                         <outlet property="tableView" destination="5lj-jh-reB" id="k2Z-qR-inZ"/>

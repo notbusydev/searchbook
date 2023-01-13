@@ -18,11 +18,12 @@ class SearchBooksViewModel {
             return itemList
         }
     }
-    private var isLoading: Bool = false {
-        didSet {
-            onIsLoadingUpdate?(isLoading)
-        }
+    
+    var emptyText: String? {
+        guard !service.currentModel.keyword.isEmpty && service.currentModel.searchBook.isEmpty else { return nil }
+        return "검색 결과가 없습니다."
     }
+    private var isLoading: Bool = false
     private let service: SearchBooksService
     private let navigator: SearchBooksNavigator
     init(service: SearchBooksService, navigator: SearchBooksNavigator) {
@@ -36,8 +37,10 @@ class SearchBooksViewModel {
         }
         guard !isLoading else { return }
         isLoading = true
+        onIsLoadingUpdate?(true)
         service.search(keyword: keyword) { [weak self] error in
             self?.isLoading = false
+            self?.onIsLoadingUpdate?(false)
             if let error = error {
                 self?.navigator.toAlert(error.localizedDescription)
             } else {
