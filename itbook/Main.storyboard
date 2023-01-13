@@ -44,7 +44,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF8-Aj-6pK">
                                                     <rect key="frame" x="20" y="170" width="120" height="36"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Web Link"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="웹 링크"/>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="bKU-oL-8il">
                                                     <rect key="frame" x="145" y="11" width="228" height="100.66666666666667"/>

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+typealias SearchBookItem = SearchBooksViewModel.SearchBookItemViewModel
 class SearchBooksViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -93,26 +93,10 @@ extension SearchBooksViewController: UISearchBarDelegate {
 }
 
 
-struct SearchBookRowViewModel: Hashable {
-    let title: String
-    let subTitle: String?
-    let isbn13: String
-    let price: String
-    let urlString: String
-    let image: String?
-    
-    init(_ book: SearchBooksResponse.Book) {
-        image = book.image
-        title = book.title
-        subTitle = book.subtitle
-        isbn13 = String(format: "ISPN13: %@", book.isbn13)
-        price = String(format: "Price: %@", book.price)
-        urlString = book.url
-    }
-}
+
 
 
 enum SearchBookRowItem: Hashable {
-    case book(SearchBookRowViewModel)
+    case book(SearchBookItem)
     case loading
 }

@@ -11,7 +11,7 @@ class SearchBooksViewModel {
     var onItemListUpdated: (() -> Void)?
     var onIsLoadingUpdate: ((Bool) -> Void)?
     var itemList: [SearchBookRowItem] {
-        let itemList = service.currentModel.searchBook.map { SearchBookRowItem.book(SearchBookRowViewModel($0)) }
+        let itemList = service.currentModel.searchBook.map { SearchBookRowItem.book(SearchBookItemViewModel($0)) }
         if let currentPage = service.currentModel.currentPage, currentPage * 10 < service.currentModel.totalCount {
             return itemList + [.loading]
         } else {
@@ -69,5 +69,23 @@ class SearchBooksViewModel {
     
     func detail(_ isbn13: String) {
         self.navigator.toBookDetail(isbn13)
+    }
+    
+    struct SearchBookItemViewModel: Hashable {
+        let title: String
+        let subTitle: String?
+        let isbn13: String
+        let price: String
+        let urlString: String
+        let image: String?
+        
+        init(_ book: SearchBooksResponse.Book) {
+            image = book.image
+            title = book.title
+            subTitle = book.subtitle
+            isbn13 = String(format: "ISPN13: %@", book.isbn13)
+            price = String(format: "가격: %@", book.price)
+            urlString = book.url
+        }
     }
 }

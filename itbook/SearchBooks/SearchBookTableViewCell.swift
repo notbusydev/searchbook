@@ -19,7 +19,7 @@ class SearchBookTableViewCell: UITableViewCell {
         super.awakeFromNib()
         webLinkButton.addTarget(self, action: #selector(self.webLinkButtonTouched), for: .touchUpInside)
     }
-    func initView(_ book: SearchBookRowViewModel) {
+    func initView(_ book: SearchBookItem) {
         thunailImageView.setImage(book.image)
         titleLabel.text = book.title
         if let subTitle = book.subTitle {
